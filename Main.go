@@ -2,48 +2,48 @@ package main
 
 import (
 	"fmt"
-	//"bufio"
-	//"os"
+	"bufio"
+	"os"
+	"math/rand"
+
 )
 
-func pathExtraction( num int) {
-
-}
-func cityExtraction(num int) {
-
-}
-func startCity() {
+func startingCity(){
 
 }
 
-func pathReverse() {
+func count(){
 
 }
 
-func printer( cityPar string) {
-
-	fmt.Println ("")
-}
-
-func Drive () {
+func DriveCity() {
 
 }
 
+func DriveExit(){
+
+}
+
+func extras(){
+
+}
+
+func printer( ) {
+
+}
 
 
-/*
-Function simulation
-Is a single driver run
 
-*/
-func simulation (int driverNumber) {
+func simulation () {
 	//------------------- 1. simulation initialization
 	var key bool = false
 
 	// new rnd number
 	var currentCity int = 0 // rnd
 
-	var location = allCities[currentCity]  // variable that holds a single city section/quadrant
+	var location [3][2]string
+	location = allCities[currentCity]
+	// variable that holds a single city section/quadrant
 	//------------------ 2.
 
 	for key == false{  //Main loop for a single
@@ -90,9 +90,9 @@ func simulation (int driverNumber) {
 		//-------------------------- 5. Exitting and Printing
 
 		// new rnd
-		var exitSelector int = 0 //RND
+		var exitSelection int = 0 //RND
 
-		if exitSelector == 2 { //  number that allows the driver to exit
+		if exitSelection == 2 { //  number that allows the driver to exit
 			// related Printing Info
 			key = true
 		}else{     // Exiting failed
@@ -100,7 +100,7 @@ func simulation (int driverNumber) {
 		}
 	//------------ Printing Extras
 
-	fmt.Println("Driver", driverNumber, "Met With Jhon Jamieson", akinaCount, " Times!")
+	fmt.Println("Driver", "<driverNumber>", "Met With Jhon Jamieson", akinaCount, " Times!")
 
 	if akinaCount != 1 || 2{
 		if akinaCount == 0{
@@ -110,7 +110,7 @@ func simulation (int driverNumber) {
 			fmt.Println("That Driver Needed Lots Of Help!")
 		}
 	}
-
+}
 }
 //
 
@@ -118,53 +118,150 @@ func simulation (int driverNumber) {
 
 func main() {
 
+// --------------------------------------------- Start/Varible Initialization
+// Array Creation - Creates 4, 2 Dimentional Arrays.
+// During Comments, a single one of these arrays might be refered to as City Sections or Quadrants
+// Looking back. Should have used a struct instead of the 2-D arrays
+
+// City 1
 	var City1 [3][2] string
 	City1 [0][0] = "Exit 1"
 	City1 [0][1] = "Path 1"
-
 	City1 [1][0] = "City"
 	City1 [1][1] = ""
-
 	City1 [2][0] = "Exit 2"
 	City1 [2][1] = "Path2"
 
+//City 2
 	var City2 [3][2] string
 	City2 [0][0] = "Exit 2"
 	City2 [0][1] = "Path 2"
-
 	City2 [1][0] = "City1"
 	City2 [1][1] = ""
-
 	City2 [2][0] = "Exit 3"
 	City2 [2][1] = "Path 3"
 
+//City 3
 	var City3 [3][2] string
 	City3 [0][0] = "Exit 3"
 	City3 [0][1] = "Path 3"
-
 	City3 [1][0] = "City2"
 	City3 [1][1] = ""
-
 	City3 [2][0] = "Exit 4"
 	City3 [2][1] = "Path 4"
 
+//City 4
 	var City4 [3][2] string
 	City4 [0][0] = "Exit 4"
 	City4 [0][1] = "Path 4"
-
 	City4 [1][0] = "City3"
 	City4 [1][1] = ""
-
 	City4 [2][0] = "Exit 1"
 	City4 [2][1] = "Path 1"
 
+// Array Creation - Create a single array to hold the previous 4 arrays.
+// Array for holding all city sections/quadrants.
+	var allCities [4] [3][2] string
+	allCities[0] = City1
+	allCities[1] = City2
+	allCities[2] = City3
+	allCities[3] = City4
 
-var allCities [4] [3][2]string
-																//array for holding all city sections/quadrants
-allCities[0] = City1
-allCities[1] = City2
-allCities[2] = City3
-allCities[3] = City4
+// Varible Creation
+// Variables will be initialized later, during the loops
+
+// Used to keep a driver in a loop
+	var key bool = false;
+
+// Used to hold the Number given by the Random number generator
+	//var pathSelection int
+
+// Used to hold the Number given by the Random number generator
+	//var exitSelection int
+
+// Used to hold the Number given by the Random number generator
+	var seed int
+
+// Holds the number of the current city, within the "allCities" array.
+//Used to set the "location" variable
+	var currentCity int
+
+// Used to hold an entire City Section
+	var location [3][2]string
+
+// Used to track the amount of times the driver has visted "Akina"
+	var akinaCount int
+
+// Stores the name of the City the driver is in before the driver moves to the next city
+	var currentCityName string
+
+// Used to hold the current driver. Changes depending on the loop number
+	var driverNumber int = 0;
+
+// Holds the string value of the path that has been selected
+	var pathname string
+
+// Holds the string value of the exit that has been selected
+	var exitname string
+
+// Holds name of the city that has been selected next
+	var nextCityname string
+
+
+
+
+// --------------------------------------------- Program Begins
+// RNG/Seed Initialization
+
+ 	scanner := bufio.NewScanner(os.Stdin)
+	fmt.PrintLn("Please enter a number:");
+	scanner.Scan()
+	input = scanner.Text()
+
+	//seed = input
+
+	rand.Seed(seed)
+
+
+// Loop to complete multiiple driving instances
+	for i:=0, i>5, i++{
+
+// Varible re-Initialization to start a driving instance
+
+			key = false
+			driverNumber++
+			akinaCount = 0
+
+// Finding a Starting City for the driving instance
+
+			startingCity();
+
+// Loop for the moving sections of a single driving instance
+			for key == false{
+
+// Path Decision. What path the driver will take out of the current city.
+				//new rnd
+				//set rnd Variables
+				driveCity();
+				// printing stuff (just print Or move the print text to a variable to be printed later)
+
+//Exit Decision. If the Driver will use an exit or continue to the city.
+				// new rnd
+				// set RND varablies
+				driveExit();
+				// printing stuff (just print Or move the print text to a variable to be printed later)
+			}
+
+// Additional Dialouge. The exta line required at the end of a driving instance.
+
+				extras();
+				printer();
+	}
+
+
+
+
+
 
 
 
