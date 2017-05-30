@@ -8,7 +8,7 @@ import (
 
 )
 
-func startingCity(){
+func startingCity() {
 
 }
 
@@ -16,11 +16,46 @@ func count(){
 
 }
 
-func DriveCity() {
+func driveCity(newNumber int, currentCity int, allCities [4][3][2]string ) (int,string,string,string,string) {
+
+// Variable Initialization
+	var pathName string
+	var exitName string
+	var location [3][2]string
+	currentCityName := location[1][0]
+
+//
+	if newNumber == 1 { // right side path, int goes up
+		if currentCity == 3 { // restricts int size
+			currentCity = 0
+		}else{
+			currentCity = currentCity + 1
+		}
+		location = allCities[currentCity]
+		pathName  = location[2][1]
+		exitName  = location[2][0]
+	}
+
+//
+	if newNumber == 0{ // left side path, int goes down
+		if currentCity == 0 { //restricts int size
+			currentCity = 3
+		}else {
+			currentCity = currentCity - 1
+		}
+		location = allCities[currentCity]
+		pathName = location[0][1]
+		exitName = location[0][0]
+	}
+
+	nextCityName := location[1][0]
+
+// Return the Values that need to be set after the function is complete
+	return currentCity,currentCityName,pathName,exitName,nextCityName
 
 }
 
-func DriveExit(){
+func driveExit(){
 
 }
 
@@ -33,7 +68,7 @@ func printer( ) {
 }
 
 
-
+/*
 func simulation () {
 	//------------------- 1. simulation initialization
 	var key bool = false
@@ -67,8 +102,8 @@ func simulation () {
 				currentCity = currentCity + 1
 			}
 			location = allCities[currentCity]
-			var pathName string = location[3][1]
-			var exitName string = location[3][0]
+			var pathName string = location[2][1]
+			var exitName string = location[2][0]
 		}
 
 		if pathSelection == 0{ // left side path, int goes down
@@ -112,7 +147,7 @@ func simulation () {
 	}
 }
 }
-//
+*/
 
 // IF for the counter for additional text output (Handled in Main)
 
@@ -180,6 +215,9 @@ func main() {
 	//var exitSelection int
 
 // Used to hold the Number given by the Random number generator
+	var newNumber int
+
+//Holds the conveted input from the user
 	var seed int
 
 // Holds the number of the current city, within the "allCities" array.
@@ -199,13 +237,13 @@ func main() {
 	var driverNumber int = 0;
 
 // Holds the string value of the path that has been selected
-	var pathname string
+	var pathName string
 
 // Holds the string value of the exit that has been selected
-	var exitname string
+	var exitName string
 
 // Holds name of the city that has been selected next
-	var nextCityname string
+	var nextCityName string
 
 
 
@@ -214,17 +252,17 @@ func main() {
 // RNG/Seed Initialization
 
  	scanner := bufio.NewScanner(os.Stdin)
-	fmt.PrintLn("Please enter a number:");
+	fmt.Println("Please enter a number:");
 	scanner.Scan()
-	input = scanner.Text()
+	input := scanner.Text()
 
-	//seed = input
+	seed = /*input*/ 5
 
 	rand.Seed(seed)
 
 
 // Loop to complete multiiple driving instances
-	for i:=0, i>5, i++{
+	for i:=0; i>5; i++{
 
 // Varible re-Initialization to start a driving instance
 
@@ -242,12 +280,16 @@ func main() {
 // Path Decision. What path the driver will take out of the current city.
 				//new rnd
 				//set rnd Variables
-				driveCity();
+				newNumber = rand.Intn(2)
+
+				currentCity,currentCityName,pathName,exitName,nextCityName = driveCity(newNumber, currentCity, allCities );
 				// printing stuff (just print Or move the print text to a variable to be printed later)
 
 //Exit Decision. If the Driver will use an exit or continue to the city.
 				// new rnd
 				// set RND varablies
+				newNumber = rand.Intn(6)
+
 				driveExit();
 				// printing stuff (just print Or move the print text to a variable to be printed later)
 			}
@@ -261,7 +303,9 @@ func main() {
 
 
 
+						fmt.Println(seed,location,akinaCount,currentCityName,pathName,exitName,nextCityName,input)
 
+/*
 
 
 
@@ -290,7 +334,7 @@ if input2 == 1 { // will need to keep the varialbes above for handling the names
 	fmt.Println("Enter City Input: ")
 	scanner.Scan()
 	input = scanner.Text()
-*/
+
 
 
 	//fmt.Println(city)
@@ -304,4 +348,6 @@ if input2 == 1 { // will need to keep the varialbes above for handling the names
 	fmt.Println("-------------")
 	var new = complie[0]
 	fmt.Println(new[1][0])
+
+	*/
 }
