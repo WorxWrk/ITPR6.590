@@ -8,65 +8,88 @@ import (
 
 )
 
-func startingCity() {
+// --------------------------------------------- Type Creation
+// Creates new data structures
 
-}
-
-func count(){
-
-}
-
-func driveCity(newNumber int, currentCity int, allCities [4][3][2]string ) (int,string,string,string,string) {
-
-// Variable Initialization
-	var pathName string
-	var exitName string
-	var location [3][2]string
-	currentCityName := location[1][0]
-
-//
-	if newNumber == 1 { // right side path, int goes up
-		if currentCity == 3 { // restricts int size
-			currentCity = 0
-		}else{
-			currentCity = currentCity + 1
-		}
-		location = allCities[currentCity]
-		pathName  = location[2][1]
-		exitName  = location[2][0]
+	type City struct{
+		path1 string
+		exit1 string
+		cityName string
+		path2 string
+		exit2 string
 	}
 
-//
-	if newNumber == 0{ // left side path, int goes down
-		if currentCity == 0 { //restricts int size
-			currentCity = 3
-		}else {
-			currentCity = currentCity - 1
-		}
-		location = allCities[currentCity]
-		pathName = location[0][1]
-		exitName = location[0][0]
+	type Driver struct{
+		driverNumber int
+		key bool
+		newNumber int
+		akinaCount int
+		currentCityNumber int
+		currentCity City
+		currentCityName string
+		pathName string
+		exitName string
+		nextCityName string
+		totalOutput []string
 	}
 
-	nextCityName := location[1][0]
+	// --------------------------------------------- Function Creation
+	// Creates the functions
 
-// Return the Values that need to be set after the function is complete
-	return currentCity,currentCityName,pathName,exitName,nextCityName
+func startingCity(driver Driver) driver{
 
+	return
 }
 
-func driveExit(){
+func count(driver Driver) driver{
 
+
+	return
 }
 
-func extras(){
+func driveCity(driver Driver, allCities [4]City) Driver {
 
+	driver.currentCityName = driver.
+
+	if driver.newNumber == 1 { // right side path, int goes up
+		if driver.currentCityNumber == 3 { // restricts int size to keep it inside the allCities array
+			driver.currentCityNumber = 0
+		} else {
+			driver.currentCityNumber = driver.currentCityNumber + 1
+		}
+	}
+
+	if driver.newNumber == 0{ // left side path, int goes down
+		if driver.currentCityNumber == 0 { // restricts int size to keep it inside the allCities array
+			driver.currentCityNumber = 3
+		} else {
+			driver.currentCityNumber = driver.currentCityNumber - 1
+		}
+	}
+
+	driver.currentCity = allCities[driver.currentCityNumber]
+	allCities.pathName = driver.currentCity.pathName
+	allCities.exitName = driver.currentCity.exitName
+	driver.nextCityName = driver.currentCity.cityName
+
+// Return the driver type with updated values
+	return driver
 }
 
-func printer( ) {
+func driveExit(driver Driver) driver{
 
+	if driver.newNumber == 2 { //  number that allows the driver to exit
+		driver.key = true
+	}
+// Return the driver type with updated values
+	return driver
 }
 
+func extras(driver Driver) driver{
+
+
+	return
+}
 
 /*
 func simulation () {
@@ -74,10 +97,10 @@ func simulation () {
 	var key bool = false
 
 	// new rnd number
-	var currentCity int = 0 // rnd
+	var currentCityNumber int = 0 // rnd
 
-	var location [3][2]string
-	location = allCities[currentCity]
+	var currentCity [3][2]string
+	currentCity = allCities[currentCityNumber]
 	// variable that holds a single city section/quadrant
 	//------------------ 2.
 
@@ -88,7 +111,7 @@ func simulation () {
 		// new RND number
 		var pathSelection int = 0 //rnd
 
-		var currentCityName string = location[1][0]
+		var currentCityName string = currentCity[1][0]
 
 		if nextCityName == "Akina" {
 		akinaCount++
@@ -96,28 +119,28 @@ func simulation () {
 
 		//------------------- 3. City movement
 		if pathSelection == 1 { // right side path, int goes up
-			if currentCity == 3 { // restricts int size
-				currentCity = 0
+			if currentCityNumber == 3 { // restricts int size
+				currentCityNumber = 0
 			}else{
-				currentCity = currentCity + 1
+				currentCityNumber = currentCityNumber + 1
 			}
-			location = allCities[currentCity]
-			var pathName string = location[2][1]
-			var exitName string = location[2][0]
+			currentCity = allCities[currentCityNumber]
+			var pathName string = currentCity[2][1]
+			var exitName string = currentCity[2][0]
 		}
 
 		if pathSelection == 0{ // left side path, int goes down
-			if currentCity == 0 { //restricts int size
-				currentCity = 3
+			if currentCityNumber == 0 { //restricts int size
+				currentCityNumber = 3
 			}else {
-				currentCity = currentCity - 1
+				currentCityNumber = currentCityNumber - 1
 			}
-			location = allCities[currentCity]
-			var pathName string = location[0][1]
-			var exitName string = location[0][0]
+			currentCity = allCities[currentCityNumber]
+			var pathName string = currentCity[0][1]
+			var exitName string = currentCity[0][0]
 		}
 
-		var nextCityName string = location[1][0]
+		var nextCityName string = currentCity[1][0]
 
 
 		//-------------------------- 4. Extras
@@ -159,44 +182,24 @@ func main() {
 // Looking back. Should have used a struct instead of the 2-D arrays
 
 // City 1
+	City1 := City {"Exit 1","Path 1","City","Exit 2","Path2"}
 	var City1 [3][2] string
-	City1 [0][0] = "Exit 1"
-	City1 [0][1] = "Path 1"
-	City1 [1][0] = "City"
-	City1 [1][1] = ""
-	City1 [2][0] = "Exit 2"
-	City1 [2][1] = "Path2"
 
 //City 2
+	City2 := City {"Exit 1","Path 1","City","Exit 2","Path2"}
 	var City2 [3][2] string
-	City2 [0][0] = "Exit 2"
-	City2 [0][1] = "Path 2"
-	City2 [1][0] = "City1"
-	City2 [1][1] = ""
-	City2 [2][0] = "Exit 3"
-	City2 [2][1] = "Path 3"
 
 //City 3
+	City3 := City {"Exit 1","Path 1","City","Exit 2","Path2"}
 	var City3 [3][2] string
-	City3 [0][0] = "Exit 3"
-	City3 [0][1] = "Path 3"
-	City3 [1][0] = "City2"
-	City3 [1][1] = ""
-	City3 [2][0] = "Exit 4"
-	City3 [2][1] = "Path 4"
 
 //City 4
+	City4 := City {"Exit 1","Path 1","City","Exit 2","Path2"}
 	var City4 [3][2] string
-	City4 [0][0] = "Exit 4"
-	City4 [0][1] = "Path 4"
-	City4 [1][0] = "City3"
-	City4 [1][1] = ""
-	City4 [2][0] = "Exit 1"
-	City4 [2][1] = "Path 1"
 
 // Array Creation - Create a single array to hold the previous 4 arrays.
 // Array for holding all city sections/quadrants.
-	var allCities [4] [3][2] string
+	var allCities [4] City
 	allCities[0] = City1
 	allCities[1] = City2
 	allCities[2] = City3
@@ -221,11 +224,11 @@ func main() {
 	var seed int
 
 // Holds the number of the current city, within the "allCities" array.
-//Used to set the "location" variable
-	var currentCity int
+//Used to set the "currentCity" variable
+	var currentCityNumber int
 
 // Used to hold an entire City Section
-	var location [3][2]string
+	var currentCity [3][2]string
 
 // Used to track the amount of times the driver has visted "Akina"
 	var akinaCount int
@@ -249,7 +252,7 @@ func main() {
 
 
 // --------------------------------------------- Program Begins
-// RNG/Seed Initialization
+// User Input And RNG/Seed Initialization
 
  	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Please enter a number:");
@@ -260,15 +263,16 @@ func main() {
 
 	rand.Seed(seed)
 
-
 // Loop to complete multiiple driving instances
 	for i:=0; i>5; i++{
 
 // Varible re-Initialization to start a driving instance
 
-			key = false
-			driverNumber++
-			akinaCount = 0
+// Varable that holds all the output of the system
+			var totalOutput []string
+
+// Varable for the new type "Driver".
+			driver := Driver 	{ false, 0, 0, 0, City1, "No City", "No Path", "No Exit", "No City", ""}
 
 // Finding a Starting City for the driving instance
 
@@ -278,12 +282,13 @@ func main() {
 			for key == false{
 
 // Path Decision. What path the driver will take out of the current city.
-				//new rnd
-				//set rnd Variables
-				newNumber = rand.Intn(2)
+				//set rnd Variable
+				driver.newNumber = rand.Intn(2)
 
-				currentCity,currentCityName,pathName,exitName,nextCityName = driveCity(newNumber, currentCity, allCities );
+				driver = driveCity(driver, allCities);
+
 				// printing stuff (just print Or move the print text to a variable to be printed later)
+
 
 //Exit Decision. If the Driver will use an exit or continue to the city.
 				// new rnd
@@ -297,13 +302,12 @@ func main() {
 // Additional Dialouge. The exta line required at the end of a driving instance.
 
 				extras();
-				printer();
 	}
 
 
 
 
-						fmt.Println(seed,location,akinaCount,currentCityName,pathName,exitName,nextCityName,input)
+						fmt.Println(seed,currentCity,akinaCount,currentCityName,pathName,exitName,nextCityName,input)
 
 /*
 
