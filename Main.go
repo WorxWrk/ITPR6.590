@@ -22,18 +22,41 @@ import (
 	}
 
 	type Driver struct{
+
+// Used to hold the current driver. Changes depending on the loop number
 		driverNumber int
+
+// Used to keep a driver in a loop
 		key bool
+
+// Used to hold the Number given by the Random number generator
 		newNumber int
+
+// Used to track the amount of times the driver has visted "Akina"
 		akinaCount int
+
+// Holds the number of the current city, within the "allCities" array.
+//Used to set the "currentCity" variable
 		currentCityNumber int
+
+// Used to hold an entire City Section
 		currentCity City
+
+// Stores the name of the City the driver is in before the driver moves to the next city
 		currentCityName string
+
+// Holds the string value of the path that has been selected
 		pathName string
+
+// Holds the string value of the exit that has been selected
 		exitName string
+
+// Holds name of the city that has been selected next
 		nextCityName string
+
+// An Array that holds all of the output the driver instance has creted
 		totalOutput []string
-	}
+		}
 
 	// --------------------------------------------- Function Creation
 	// Creates the functions
@@ -108,11 +131,11 @@ func extras(driver Driver) Driver{
 	mergedStr := strings.Join([]string{"\nDriver", strDriverNumber, "Met With Jhon Jamieson", strAkinaCount, "Times!"}, " ")
 	driver.totalOutput = append(driver.totalOutput, mergedStr)
 
-	if driver.akinaCount != 1 | 2 {
+	if driver.akinaCount == 1 | 2 {
 		if driver.akinaCount == 0{
 			driver.totalOutput = append(driver.totalOutput, "\nThat Driver Missed Out!")
 		}
-		if driver.akinaCount <= 3{
+		if driver.akinaCount >= 3{
 			driver.totalOutput = append(driver.totalOutput, "\nThat Driver Needed Lots Of Help!")
 		}
 	}
@@ -140,96 +163,11 @@ func driveCityPrint (driver Driver) Driver{
 	return driver
 }
 
-
-/*
-func simulation () {
-	//------------------- 1. simulation initialization
-	var key bool = false
-
-	// new rnd number
-	var currentCityNumber int = 0 // rnd
-
-	var currentCity [3][2]string
-	currentCity = allCities[currentCityNumber]
-	// variable that holds a single city section/quadrant
-	//------------------ 2.
-
-	for key == false{  //Main loop for a single
-
-		var akinaCount int = 0
-
-		// new RND number
-		var pathSelection int = 0 //rnd
-
-		var currentCityName string = currentCity[1][0]
-
-		if nextCityName == "Akina" {
-		akinaCount++
-		}
-
-		//------------------- 3. City movement
-		if pathSelection == 1 { // right side path, int goes up
-			if currentCityNumber == 3 { // restricts int size
-				currentCityNumber = 0
-			}else{
-				currentCityNumber = currentCityNumber + 1
-			}
-			currentCity = allCities[currentCityNumber]
-			var pathName string = currentCity[2][1]
-			var exitName string = currentCity[2][0]
-		}
-
-		if pathSelection == 0{ // left side path, int goes down
-			if currentCityNumber == 0 { //restricts int size
-				currentCityNumber = 3
-			}else {
-				currentCityNumber = currentCityNumber - 1
-			}
-			currentCity = allCities[currentCityNumber]
-			var pathName string = currentCity[0][1]
-			var exitName string = currentCity[0][0]
-		}
-
-		var nextCityName string = currentCity[1][0]
-
-
-		//-------------------------- 4. Extras
-		// Moved to the Top of the Loop to catch the starting City
-		//-------------------------- 5. Exitting and Printing
-
-		// new rnd
-		var exitSelection int = 0 //RND
-
-		if exitSelection == 2 { //  number that allows the driver to exit
-			// related Printing Info
-			key = true
-		}else{     // Exiting failed
-			     // related Printing info
-		}
-	//------------ Printing Extras
-
-	fmt.Println("Driver", "<driverNumber>", "Met With Jhon Jamieson", akinaCount, " Times!")
-
-	if akinaCount != 1 || 2{
-		if akinaCount == 0{
-			fmt.Println("That Driver Missed Out!")
-		}
-		if akinaCount <= 3{
-			fmt.Println("That Driver Needed Lots Of Help!")
-		}
-	}
-}
-}
-*/
-
-// IF for the counter for additional text output (Handled in Main)
-
 func main() {
 
 // --------------------------------------------- Start/Varible Initialization
-// Array Creation - Creates 4, 2 Dimentional Arrays.
-// During Comments, a single one of these arrays might be refered to as City Sections or Quadrants
-// Looking back. Should have used a struct instead of the 2-D arrays
+// City Creation - Creates 4 varablies of the new type City.
+// During Comments, a single one of these cities might be refered to as City Sections or Quadrants
 
 // City 1
 	City1 := City {"Path 1","Exit 1","City1","Path2","Exit 2"}
@@ -243,7 +181,7 @@ func main() {
 //City 4
 	City4 := City {"Path 1","Exit 1","City4","Path2","Exit 2"}
 
-// Array Creation - Create a single array to hold the previous 4 arrays.
+// Array Creation - Create a single array to hold the previous 4 Cities.
 // Array for holding all city sections/quadrants.
 	var allCities [4] City
 	allCities[0] = City1
@@ -254,48 +192,8 @@ func main() {
 // Varible Creation
 // Variables will be initialized later, during the loops
 
-// Used to keep a driver in a loop
-	//var key bool = false;
-
-// Used to hold the Number given by the Random number generator
-	//var pathSelection int
-
-// Used to hold the Number given by the Random number generator
-	//var exitSelection int
-
-// Used to hold the Number given by the Random number generator
-	//var newNumber int
-
 //Holds the conveted input from the user
 	var seed int
-
-// Holds the number of the current city, within the "allCities" array.
-//Used to set the "currentCity" variable
-	//var currentCityNumber int
-
-// Used to hold an entire City Section
-	//var currentCity [3][2]string
-
-// Used to track the amount of times the driver has visted "Akina"
-	//var akinaCount int
-
-// Stores the name of the City the driver is in before the driver moves to the next city
-	//var currentCityName string
-
-// Used to hold the current driver. Changes depending on the loop number
-	//var driverNumber int = 0;
-
-// Holds the string value of the path that has been selected
-	//var pathName string
-
-// Holds the string value of the exit that has been selected
-	//var exitName string
-
-// Holds name of the city that has been selected next
-	//var nextCityName string
-
-
-
 
 // --------------------------------------------- Program Begins
 // User Input And RNG/Seed Initialization
@@ -305,11 +203,14 @@ func main() {
 	scanner.Scan()
 	input := scanner.Text()
 	seed, err := strconv.Atoi(input)
+	//userKey := false
 
-	for userKey := false ; userKey == false{
+
+	//for userKey == false{
 		if err != nil{
 			fmt.Println("Please provide an input of the Integer type")
 		}
+	//}
 
 	rand.Seed(int64(seed))
 
@@ -336,17 +237,16 @@ func main() {
 				//set rnd Variable
 				driver.newNumber = rand.Intn(2)
 				driver = count(driver)
-
 				driver = driveCity(driver, allCities);
 
 				// printing stuff (just print Or move the print text to a variable to be printed later)
 
 
 //Exit Decision. If the Driver will use an exit or continue to the city.
-				// new rnd
 				// set RND varablies
 				driver.newNumber = rand.Intn(6)
 
+				// Decides if the driver will exit or continue
 				driver = driveExit(driver);
 				driver = driveCityPrint(driver);
 				// printing stuff (just print Or move the print text to a variable to be printed later)
@@ -360,57 +260,4 @@ func main() {
 				//for
 				fmt.Println(driver.totalOutput)
 	}
-
-
-
-						//fmt.Println(seed,currentCity,akinaCount,currentCityName,pathName,exitName,nextCityName,input)
-
-/*
-
-
-
-var input int = 0 // if statments for managing the -numbers and over 3 (4+),  over 3 will rest to 0,  - numbers (under 0) will increase to 3
-var input2 int = 1 // 2 possiblities, need an if for number changeing, eg 0 =0 and 1 = 2, this is due to the city name being inbetween the 2 path groups
-var section = complie[input] // variable that holds a single city section/quadrant
-
-var cityname string = section[1][0]
-var pathname string = section[2][1]
-
-if input2 == 1 { // will need to keep the varialbes above for handling the names as the "section" state will change without the statement
-	section = complie[input + input2]  // right side path, int goes up
-	fmt.Println("The Driver is headed to",section[1][0],"from", cityname, "using the path", pathname)
-}else{
-	section = complie[input - input2]  // left side path, int goes down
-}
-
-	//var input string
-/*
-	scanner := bufio.NewScanner(os.Stdin)
-
-	fmt.Println("Enter Path Input: ")
-	scanner.Scan()
-	input = scanner.Text()
-
-	fmt.Println("Enter City Input: ")
-	scanner.Scan()
-	input = scanner.Text()
-
-
-
-	//fmt.Println(city)
-	fmt.Println(path1)
-	fmt.Println(complie)
-	fmt.Println(aCity)
-	fmt.Println(section)
-
-
-
-	fmt.Println("-------------")
-	var new = complie[0]
-	fmt.Println(new[1][0])
-
-	*/
-
-
-
 }
