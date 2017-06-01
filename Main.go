@@ -128,15 +128,17 @@ func extras(driver Driver) Driver{
 	var strAkinaCount string
 	strAkinaCount = strconv.Itoa(driver.akinaCount)
 
-	mergedStr := strings.Join([]string{"\nDriver", strDriverNumber, "Met With Jhon Jamieson", strAkinaCount, "Times!"}, " ")
+	mergedStr := strings.Join([]string{"Driver", strDriverNumber, "Met With Jhon Jamieson", strAkinaCount, "Times!"}, " ")
 	driver.totalOutput = append(driver.totalOutput, mergedStr)
 
-	if driver.akinaCount == 1 | 2 {
+	if driver.akinaCount != 1 | 2 {
+
 		if driver.akinaCount == 0{
-			driver.totalOutput = append(driver.totalOutput, "\nThat Driver Missed Out!")
+			driver.totalOutput = append(driver.totalOutput, "That Driver Missed Out!")
 		}
+
 		if driver.akinaCount >= 3{
-			driver.totalOutput = append(driver.totalOutput, "\nThat Driver Needed Lots Of Help!")
+			driver.totalOutput = append(driver.totalOutput, "That Driver Needed Lots Of Help!")
 		}
 	}
 	fmt.Println("-----")
@@ -149,7 +151,7 @@ func driveCityPrint (driver Driver) Driver{
 	strDriverNumber = strconv.Itoa(driver.driverNumber)
 
 	mergedStr := strings.Join([]string{
-		"\nDriver",
+		"Driver",
 		strDriverNumber,
 		"heading from",
 		driver.currentCityName,
@@ -203,19 +205,16 @@ func main() {
 	scanner.Scan()
 	input := scanner.Text()
 	seed, err := strconv.Atoi(input)
-	//userKey := false
 
-
-	//for userKey == false{
 		if err != nil{
 			fmt.Println("Please provide an input of the Integer type")
+			// some form of panic
 		}
-	//}
 
 	rand.Seed(int64(seed))
 
 // Loop to complete multiiple driving instances
-	for i:=0; i<5; i++{
+	for index:=0; index < 5; index++{
 
 // Varible re-Initialization to start a driving instance
 
@@ -223,7 +222,7 @@ func main() {
 			var totalOutput []string
 
 // Varable for the new type "Driver".
-			driver := Driver { i+1, false, 0, 0, 0, City1, "No City", "No Path", "No Exit", "No City", totalOutput}
+			driver := Driver { index + 1, false, 0, 0, 0, City1, "No City", "No Path", "No Exit", "No City", totalOutput}
 
 // Finding a Starting City for the driving instance
 
@@ -234,30 +233,30 @@ func main() {
 			for driver.key == false{
 
 // Path Decision. What path the driver will take out of the current city.
-				//set rnd Variable
-				driver.newNumber = rand.Intn(2)
-				driver = count(driver)
+
+				driver.newNumber = rand.Intn(2)	//Sets a new rnd Variable
 				driver = driveCity(driver, allCities);
 
-				// printing stuff (just print Or move the print text to a variable to be printed later)
-
-
 //Exit Decision. If the Driver will use an exit or continue to the city.
-				// set RND varablies
+				// set RND variable
 				driver.newNumber = rand.Intn(6)
 
 				// Decides if the driver will exit or continue
 				driver = driveExit(driver);
+
+				// Stores the string for this loop (within a driving instance)
 				driver = driveCityPrint(driver);
-				// printing stuff (just print Or move the print text to a variable to be printed later)
+				driver = count(driver)
 			}
 
-// Additional Dialouge. The exta line required at the end of a driving instance.
+// Additional Dialouge. The exta lines required at the end of a driving instance.
 
 				driver = extras(driver);
 
 // Print the all the output from this drive instance
-				//for
-				fmt.Println(driver.totalOutput)
+
+				for _, printAll := range driver.totalOutput {
+					fmt.Println(printAll)
+				}
 	}
 }
