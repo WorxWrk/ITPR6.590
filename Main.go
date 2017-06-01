@@ -7,7 +7,6 @@ import (
 	"math/rand"
 	"strings"
 	"strconv"
-
 )
 
 // --------------------------------------------- Type Creation
@@ -131,8 +130,7 @@ func extras(driver Driver) Driver{
 	mergedStr := strings.Join([]string{"Driver", strDriverNumber, "Met With Jhon Jamieson", strAkinaCount, "Times!"}, " ")
 	driver.totalOutput = append(driver.totalOutput, mergedStr)
 
-	if driver.akinaCount != 1 | 2 {
-
+	//if driver.akinaCount != 1 | 2 {
 		if driver.akinaCount == 0{
 			driver.totalOutput = append(driver.totalOutput, "That Driver Missed Out!")
 		}
@@ -140,8 +138,9 @@ func extras(driver Driver) Driver{
 		if driver.akinaCount >= 3{
 			driver.totalOutput = append(driver.totalOutput, "That Driver Needed Lots Of Help!")
 		}
-	}
-	fmt.Println("-----")
+	//}
+
+	driver.totalOutput = append(driver.totalOutput, "-----")
 	return driver
 }
 
@@ -207,8 +206,7 @@ func main() {
 	seed, err := strconv.Atoi(input)
 
 		if err != nil{
-			fmt.Println("Please provide an input of the Integer type")
-			// some form of panic
+			panic("Please provide a number input")
 		}
 
 	rand.Seed(int64(seed))
