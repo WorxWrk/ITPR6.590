@@ -205,3 +205,46 @@ func TestCitySkipDown(t *testing.T){ // Actually tests for the number being set 
     assert.Equal( 3, driver.currentCityNumber,"The driver did not skip Cities ")
 
 }
+
+//--------------------------------driveCityPrint()-----------------
+
+func TestAddingToPrintMain(t *testing.T){
+//Set Up
+  assert := assert.New(t)
+  City2 := City{"Blank","Blank","Blank","Blank","Blank",}
+  var totalOutput []string
+  driver := Driver { 1, false, 0, 2, 1, City2, "Akina", "the Road", "-", "NextCity", totalOutput}
+  driver = driveCityPrint(driver)
+// Test
+
+  assert.Equal("Driver 1 heading from Akina to NextCity via the Road", driver.totalOutput[0],"Values were not the same")
+
+}
+
+func TestAddingToPrintExtra(t *testing.T){
+//Set Up
+  assert := assert.New(t)
+  City2 := City{"Blank","Blank","Blank","Blank","Blank",}
+  var totalOutput []string
+  driver := Driver { 1, false, 0, 2, 1, City2, "Akina", "-", "Karamu Road", "Outside City", totalOutput}
+  driver = driveCityPrint(driver)
+// Test
+
+  assert.Equal("Driver 1 has gone to Napier", driver.totalOutput[1],"Values were not the same")
+
+}
+
+//--------------------------------extras()-------------------------
+
+func TestMeetingExtra(t *testing.T){
+//Set Up
+  assert := assert.New(t)
+  City2 := City{"Blank","Blank","Blank","Blank","Blank",}
+  var totalOutput []string
+  driver := Driver { 1, false, 0, 5, 0, City2, "-", "-", "-", "-", totalOutput}
+  driver = extras(driver)
+// Test
+
+    assert.Equal("Driver 1 Met With Jhon Jamieson 5 Times!", driver.totalOutput[0],"Values were not the same")
+
+}
