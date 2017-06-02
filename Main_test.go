@@ -91,10 +91,10 @@ func TestDriverExits(t *testing.T){
 // Test
 
   if driver.key != true {
+    t.Error("The driver did not exit caused by the key")
+    }
     if driver.nextCityName != "Outside City"{
-      t.Error("The key and city name are not correct")
-      t.Error("The driver did not exit")
-      }
+      t.Error("The driver did not exit caused by the City Name")
     }
 }
 
@@ -109,10 +109,11 @@ func TestDriverExitsFails(t *testing.T){
 // Test
 
   if driver.key != false {
-    if driver.nextCityName == "Outside City"{
-      t.Error("The driver did exit")
-      }
-    }
+    t.Error("The driver did exit. Casued by the key")
+  }
+  if driver.nextCityName == "Outside City"{
+    t.Error("The driver did exit. Casued by the City Name")
+  }
 }
 
 // --------------------------------driveCity()---------------------
