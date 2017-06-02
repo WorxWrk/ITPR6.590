@@ -69,7 +69,7 @@ func startingCity(driver Driver, allCities [4]City) Driver{
 	return driver
 }
 
-func count(driver Driver) Driver{
+func akinaCount(driver Driver) Driver{
 
 	if driver.currentCityName == "Akina" {
 			driver.akinaCount = driver.akinaCount + 1
@@ -161,6 +161,26 @@ func driveCityPrint (driver Driver) Driver{
 		 " ")
 	driver.totalOutput = append(driver.totalOutput, mergedStr)
 
+	if driver.nextCityName == "Outside City"{
+
+		if driver.exitName == "Karamu Road"{
+			driver.nextCityName = "Napier"
+		}
+		if driver.exitName == "Omahu Road"{
+			driver.nextCityName = "Flaxmere"
+		}
+		// if driver.exitName == "Havelock Road" | "Railway Road"{
+		// 	driver.nextCityName = "Outside City"
+		// }
+
+		mergedStr := strings.Join([]string{
+			"Driver",
+			strDriverNumber,
+			"has gone to",
+			driver.nextCityName,},
+			 " ")
+		 driver.totalOutput = append(driver.totalOutput, mergedStr)
+	}
 	return driver
 }
 
@@ -171,16 +191,16 @@ func main() {
 // During Comments, a single one of these cities might be refered to as City Sections or Quadrants
 
 // City 1
-	City1 := City {"Path 1","Exit 1","City1","Path2","Exit 2"}
+	City1 := City {"Southampton Street W","Railway Road","Stortford Lodge","Pakowhai Road","Omahu Road"}
 
 //City 2
-	City2 := City {"Path 1","Exit 1","City2","Path2","Exit 2"}
+	City2 := City {"Pakowhai Road","Omahu Road","Mahora","Frederick Street","Karamu Road N"}
 
 //City 3
-	City3 := City {"Path 1","Exit 1","Akina","Path2","Exit 2"}
+	City3 := City {"Frederick Street","Karamu Road N","Mayfair","Willowpark Road","Havelock Road"}
 
 //City 4
-	City4 := City {"Path 1","Exit 1","City4","Path2","Exit 2"}
+	City4 := City {"Willowpark Road","Havelock Road","Akina","Southampton Street W","Railway Road"}
 
 // Array Creation - Create a single array to hold the previous 4 Cities.
 // Array for holding all city sections/quadrants.
@@ -244,7 +264,7 @@ func main() {
 
 				// Stores the string for this loop (within a driving instance)
 				driver = driveCityPrint(driver);
-				driver = count(driver)
+				driver = akinaCount(driver)
 			}
 
 // Additional Dialouge. The exta lines required at the end of a driving instance.
