@@ -130,6 +130,8 @@ func extras(driver Driver) Driver{
 	mergedStr := strings.Join([]string{"Driver", strDriverNumber, "Met With Jhon Jamieson", strAkinaCount, "Times!"}, " ")
 	driver.totalOutput = append(driver.totalOutput, mergedStr)
 
+// Additional output based on akinaCount
+
 	//if driver.akinaCount != 1 | 2 {
 		if driver.akinaCount == 0{
 			driver.totalOutput = append(driver.totalOutput, "That Driver Missed Out!")
@@ -144,6 +146,7 @@ func extras(driver Driver) Driver{
 	return driver
 }
 
+// Adds the current data to the array
 func driveCityPrint (driver Driver) Driver{
 
 	var strDriverNumber string
@@ -157,10 +160,10 @@ func driveCityPrint (driver Driver) Driver{
 		"to",
 		driver.nextCityName,
 		"via",
-		driver.pathName },
-		 " ")
+		driver.pathName }, " ")
 	driver.totalOutput = append(driver.totalOutput, mergedStr)
 
+// the Extra output required when the driver exits
 	if driver.nextCityName == "Outside City"{
 
 		if driver.exitName == "Karamu Road"{
@@ -172,6 +175,7 @@ func driveCityPrint (driver Driver) Driver{
 		// if driver.exitName == "Havelock Road" | "Railway Road"{
 		// 	driver.nextCityName = "Outside City"
 		// }
+
 
 		mergedStr := strings.Join([]string{
 			"Driver",
@@ -234,8 +238,6 @@ func main() {
 // Loop to complete multiiple driving instances
 	for index:=0; index < 5; index++{
 
-// Varible re-Initialization to start a driving instance
-
 // Varable that holds all the output of the system
 			var totalOutput []string
 
@@ -247,7 +249,7 @@ func main() {
 			driver.newNumber = rand.Intn(4)
 			driver = startingCity(driver, allCities);
 
-// Loop for the moving sections of a single driving instance
+// Loop for the moving sections of a single driving instance/simulation
 			for driver.key == false{
 
 // Path Decision. What path the driver will take out of the current city.
@@ -264,7 +266,7 @@ func main() {
 
 				// Stores the string for this loop (within a driving instance)
 				driver = driveCityPrint(driver);
-				driver = akinaCount(driver)
+				driver = akinaCount(driver);
 			}
 
 // Additional Dialouge. The exta lines required at the end of a driving instance.
